@@ -3,6 +3,7 @@ package com.xt.springboot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * @SpringBootApplication : 标注一个主程序类，说明这是一个 Spring Boot 应用
