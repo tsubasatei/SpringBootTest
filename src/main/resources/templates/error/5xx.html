@@ -42,6 +42,10 @@
 	</head>
 
 	<body>
+		<!--
+			引入抽取的 topbar
+			模板名：会使用 thymeleaf 的前后缀配置规则进行解析
+		-->
 		<div th:replace="commons/bar :: topbar"></div>
 
 		<div class="container-fluid">
@@ -49,12 +53,15 @@
 				<div th:replace="commons/bar :: #sidebar"></div>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h1>4xx</h1>
+					<h1>5xx</h1>
 					<h2>timestamp: [[${timestamp}]]</h2>
 					<h2>status: [[${status}]]</h2>
 					<h2>error: [[${error}]]</h2>
 					<h2>exception: [[${exception}]]</h2>
 					<h2>message: [[${message}]]</h2>
+					<h2>ext.code: [[${ext.code}]]</h2>
+					<h2>ext.message: [[${ext.message}]]</h2>
+					<h2>company: [[${company}]]</h2>
 				</main>
 			</div>
 		</div>

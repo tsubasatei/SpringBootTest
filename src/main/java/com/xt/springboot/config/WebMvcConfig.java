@@ -6,7 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 使用 WebMvcConfigurer 可以扩展 SpringMVC 的功能
@@ -71,4 +74,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
         return new HiddenHttpMethodFilter();
     }
+
 }
