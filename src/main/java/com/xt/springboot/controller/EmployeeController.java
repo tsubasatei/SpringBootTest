@@ -99,6 +99,8 @@ public class EmployeeController {
 
     /**
      * 根据 id 删除员工信息
+     * 有问题 DELETE 请求不支持
+     *
      * @param id
      * @return
      */

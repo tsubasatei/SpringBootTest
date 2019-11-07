@@ -1,7 +1,7 @@
 package com.xt.springboot;
 
 import com.xt.springboot.bean.Person;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

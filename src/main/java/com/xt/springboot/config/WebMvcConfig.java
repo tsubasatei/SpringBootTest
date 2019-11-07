@@ -4,15 +4,16 @@ import com.xt.springboot.component.LoginHandlerInterceptor;
 import com.xt.springboot.component.MyLocaleResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 /**
  * 使用 WebMvcConfigurer 可以扩展 SpringMVC 的功能
  * @EnableWebMvc : 全面接管 SpringMVC,不要使用
+ *
+ * SpringBoot 2.X implements WebMvcConfigurer
+ * SpringBoot 1.X extends WebMvcConfigurerAdapter
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -60,5 +61,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver() {
         return new MyLocaleResolver();
+    }
+
+    /**
+     * 注册 HiddenHttpMethodFilter，将 修改、删除 的 post 请求转为 PUT、DELETE 请求
+     * @return
+     */
+    @Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
     }
 }

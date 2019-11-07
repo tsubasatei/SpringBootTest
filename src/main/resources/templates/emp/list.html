@@ -45,12 +45,12 @@
 							</thead>
 							<tbody>
 								<tr th:each="emp : ${emps}">
-									<td th:text="${emp.getId()}"></td>
-									<td th:text="${emp.getLastName()}"></td>
-									<td th:text="${emp.getEmail()}"></td>
-									<td th:text="${emp.getGender()}==0 ? '女' : '男'"></td>
-									<td th:text="${emp.getDepartment().getDepartmentName()}"></td>
-									<td th:text="${#dates.format(emp.getBirth(), 'yyyy-MM-dd HH:mm')}"></td>
+									<td th:text="${emp.id}"></td>
+									<td th:text="${emp.lastName}"></td>
+									<td th:text="${emp.email}"></td>
+									<td th:text="${emp.gender}==0 ? '女' : '男'"></td>
+									<td th:text="${emp.department.departmentName}"></td>
+									<td th:text="${#dates.format(emp.birth, 'yyyy-MM-dd HH:mm')}"></td>
 									<td>
 										<a class="btn btn-sm btn-primary" th:href="@{/emp/}+${emp.id}">编辑</a>
 										<button th:attr="del_uri=@{/emp/} + ${emp.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>
@@ -60,8 +60,9 @@
 						</table>
 					</div>
 				</main>
+				<!-- 将form表单写在外面，所有的删除操作共用一个表单 -->
 				<form id="deleteForm" method="post">
-					<input type="hidden" name="_method" value="DELETE">
+					<input type="hidden" name="_method" value="delete">
 				</form>
 			</div>
 		</div>
@@ -70,7 +71,7 @@
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
-		<script type="text/javascript" src="asserts/js/popper.min.js" th:src="@{/static/asserts/js/popper.min.js}"></script>
+		<script type="text/javascript" src="asserts/js/popper.min.js" th:src="@{/webjars/popper.js/1.14.3/popper.js}"></script>
 		<script type="text/javascript" src="asserts/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.js}"></script>
 
 		<!-- Icons -->
@@ -79,13 +80,21 @@
 			feather.replace()
 		</script>
 
-		<!-- Graphs -->
-		<script type="text/javascript" src="asserts/js/Chart.min.js" th:src="@{/static/asserts/js/Chart.min.js}"></script>
 		<script>
-			$(".deleteBtn").click(function () {
-                console.log($(this).attr('del_uri'));
+			/*$(function () {
+			    alert("hello");
+                $(".deleteBtn").click(function () {
+                    var url = $(this).attr('del_uri');
+                    // 删除当前员工
+                    $("#deleteForm").attr('action', url).submit();
+                    return false;
+                });
+            })*/
+            $(".deleteBtn").click(function () {
+                var url = $(this).attr('del_uri');
+                //根据点击事件获取到的请求删除当前id
                 // 删除当前员工
-                $('#deleteForm').attr('action', $(this).attr('del_uri')).submit();
+                $("#deleteForm").attr("action", url).submit();
                 return false;
             });
 		</script>
