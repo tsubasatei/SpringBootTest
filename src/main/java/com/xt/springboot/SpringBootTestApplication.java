@@ -1,5 +1,6 @@
 package com.xt.springboot;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  *      SpringBoot会从这四个位置全部加载主配置文件；互补配置；
  */
 //@ImportResource(locations = {"classpath:beans.xml"})
+@MapperScan("com.xt.springboot.mapper")
 @SpringBootApplication
 public class SpringBootTestApplication {
 

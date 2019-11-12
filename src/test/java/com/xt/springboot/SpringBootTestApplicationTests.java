@@ -1,12 +1,16 @@
 package com.xt.springboot;
 
 import com.xt.springboot.bean.Person;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * SpringBoot 单元测试
@@ -21,9 +25,16 @@ class SpringBootTestApplicationTests {
     @Autowired
     ApplicationContext ioc;
 
+    @Autowired
+    DataSource dataSource;
+
     // 记录器
     Logger logger = LoggerFactory.getLogger(getClass());
 
+    /**
+     * 注意： @Test 引用的是 org.junit.jupiter.api.Test
+     * 引用错误，没有可运行标识
+     */
     @Test
     public void testHelloService () {
         boolean b = ioc.containsBean("helloService");
@@ -32,8 +43,14 @@ class SpringBootTestApplicationTests {
     }
 
     @Test
-    void contextLoads() {
+    void contextLoads() throws SQLException {
 
+        // class com.zaxxer.hikari.HikariDataSource
+        System.out.println(dataSource.getClass());
+        Connection connection = dataSource.getConnection();
+        // HikariProxyConnection @1728726840 wrapping com.mysql.cj.jdbc.ConnectionImpl@47ffdbba
+        System.out.println(connection);
+        connection.close();
         /**
          * 日志级别：
          * 由低到高：trace < debug < info < warn < error
