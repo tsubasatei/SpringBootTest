@@ -11,4 +11,10 @@ public interface EmployeeMapper {
     Employee getById(Integer id);
 
     void insert(Employee employee);
+
+    void updateEmp(Employee employee);
+
+    void deleteEMp(Integer id);
+
+    Employee getEmpByLastName(String lastName);
 }

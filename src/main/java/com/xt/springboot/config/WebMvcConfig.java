@@ -52,11 +52,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 registry.addViewController("/main.html").setViewName("dashboard");
             }
 
-            @Override
+           /* @Override
             public void addInterceptors(InterceptorRegistry registry) {
                 registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
                         .excludePathPatterns("/", "/index.html", "/user/login", "/static/**", "/webjars/**");
-            }
+            }*/
         };
         return webMvcConfigurer;
     }

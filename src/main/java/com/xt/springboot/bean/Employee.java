@@ -8,7 +8,7 @@ public class Employee {
     private String lastName;
     private String email;
     private Integer gender;
-    private Integer did;
+    private Integer dId;
 
     @Override
     public String toString() {
@@ -17,7 +17,7 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
-                ", did=" + did +
+                ", dId=" + dId +
                 '}';
     }
 
@@ -53,11 +53,11 @@ public class Employee {
         this.gender = gender;
     }
 
-    public Integer getDid() {
-        return did;
+    public Integer getdId() {
+        return dId;
     }
 
-    public void setDid(Integer did) {
-        this.did = did;
+    public void setdId(Integer dId) {
+        this.dId = dId;
     }
 }
