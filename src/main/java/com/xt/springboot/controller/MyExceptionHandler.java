@@ -34,7 +34,7 @@ public class MyExceptionHandler {
      * @return
      */
     @ExceptionHandler(UserNotExistException.class)
-    public String handleException(Exception e, HttpServletRequest request) {
+    public String handleException(UserNotExistException e, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<>();
 
         /**

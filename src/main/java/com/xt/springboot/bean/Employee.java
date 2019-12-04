@@ -1,9 +1,11 @@
 package com.xt.springboot.bean;
 
+import java.io.Serializable;
+
 /**
  * 员工
  */
-public class Employee {
+public class Employee implements Serializable {
     private Integer id;
     private String lastName;
     private String email;

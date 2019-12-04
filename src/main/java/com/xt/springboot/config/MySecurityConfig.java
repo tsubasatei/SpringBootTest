@@ -46,7 +46,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
          * 2、重定向到 /login?error表示登陆失败
          * 3、更多详细规定
          * 4、默认 post 形式的 /login代表处理登陆
-         * 5、一但定制 loginPage；那么 loginPage的 post请求就是登陆
+         * 5、一旦定制 loginPage；那么 loginPage的 post请求就是登陆
          */
         http.formLogin().usernameParameter("user").passwordParameter("pwd").loginPage("/userLogin");
 
