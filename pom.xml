@@ -184,6 +184,20 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
+        <!-- SpringBoot默认使用SpringData ElasticSearch模块进行操作 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+
+        <!-- Jest  -->
+        <dependency>
+            <groupId>io.searchbox</groupId>
+            <artifactId>jest</artifactId>
+            <version>6.3.1</version>
+        </dependency>
+
+
     </dependencies>
 
     <!-- spring-boot-maven-plugin 插件，可以将应用打包成一个可执行的 jar 包-->

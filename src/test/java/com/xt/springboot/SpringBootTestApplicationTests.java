@@ -1,8 +1,15 @@
 package com.xt.springboot;
 
+import com.xt.springboot.bean.Article;
+import com.xt.springboot.bean.Book;
 import com.xt.springboot.bean.Employee;
 import com.xt.springboot.bean.Person;
 import com.xt.springboot.mapper.EmployeeMapper;
+import com.xt.springboot.repository.BookRepository;
+import io.searchbox.client.JestClient;
+import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +20,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -42,10 +50,69 @@ class SpringBootTestApplicationTests {
     @Autowired
     EmployeeMapper employeeMapper;
 
+    @Autowired
+    JestClient jestClient;
 
+    @Autowired
+    BookRepository bookRepository;
     // 记录器
     Logger logger = LoggerFactory.getLogger(getClass());
+    
+    @Test
+    public void testES () {
+//        Book book = new Book();
+//        book.setId(2);
+//        book.setBookName("西游记");
+//        book.setAuthor("吴承恩");
+//
+//        bookRepository.index(book);
 
+        List<Book> list = bookRepository.findByBookNameLike("游");
+        System.out.println(list);
+
+    }
+
+    @Test
+    public void testJest () throws IOException {
+
+        // 1. 给 ES 中索引保存一个文档
+        Article article = new Article();
+        article.setId(1);
+        article.setTitle("好消息");
+        article.setAuthor("sanae");
+        article.setContent("hello world");
+
+        // 2. 构建一个索引功能
+        Index index = new Index.Builder(article).index("jdbc").type("news").build();
+
+        // 3. 执行
+        jestClient.execute(index);
+    }
+
+    // 测试搜索
+    @Test
+    public void testJestSearch () {
+        //查询表达式
+        String json ="{\n" +
+                "    \"query\" : {\n" +
+                "        \"match\" : {\n" +
+                "            \"content\" : \"hello\"\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+
+        //更多操作：https://github.com/searchbox-io/Jest/tree/master/jest
+        //构建搜索功能
+        Search search = new Search.Builder(json).addIndex("jdbc").addType("news").build();
+
+        //执行
+        try {
+            SearchResult result = jestClient.execute(search);
+            System.out.println(result.getJsonString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * Redis常见的五大数据类型
      *  String（字符串）、List（列表）、Set（集合）、Hash（散列）、ZSet（有序集合）
